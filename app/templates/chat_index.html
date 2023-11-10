@@ -38,13 +38,12 @@
       href="https://fonts.cdnfonts.com/css/helvetica-neue-9"
       rel="stylesheet"
     />
+
     <!-- Link to the external CSS and JS -->
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='css/chat_index.css') }}"
     />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{{ url_for('static', filename='js/chat_index.js') }}"></script>
   </head>
   <body>
     <h1>Chat with Docs</h1>
@@ -177,4 +176,9 @@
       </div>
     </div>
   </body>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/8.0.0/marked.min.js"></script>
+  <script src="{{ url_for('static', filename='js/chat_index.js') }}"></script>
 </html>

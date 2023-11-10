@@ -59,7 +59,7 @@ def split_text(text, document_title):
     for sentence in sentences:
         tokens_count = num_tokens(sentence)
 
-        if current_section["tokens"] + tokens_count > MAX_LENGTH:
+        if current_section["tokens"] + tokens_count > 1000:
             current_section["text"] = " ".join(current_sentences)
             current_section["loc"] = get_first_10_words(current_section["text"])
             sections.append(current_section)
@@ -157,7 +157,7 @@ def get_embedding(
 
 
 def compute_doc_embeddings(
-    df: pd.DataFrame, api_key, batch_size=3, num_workers=6
+    df: pd.DataFrame, api_key, batch_size=2, num_workers=6
 ) -> Dict[Tuple[str, str], List[float]]:
     api_key = api_key
     embeddings = {}
@@ -201,7 +201,7 @@ def strings_ranked_by_relatedness(
     df: pd.DataFrame,
     api_key,
     relatedness_fn=lambda x, y: 1 - spatial.distance.cosine(x, y),
-    top_n: int = TOP_N,
+    top_n: int = 20,
 ) -> pd.DataFrame:
     openai.api_key = api_key
     query_embedding_response = openai.Embedding.create(
@@ -281,7 +281,7 @@ def ask(
 ):
     openai.api_key = api_key
     prompt = query
-    token_budget = 7096 - num_tokens(prompt, model=model)
+    token_budget = 60000 - num_tokens(prompt, model=model)
 
     message, full_message, docs_used = query_message(
         prompt,
