@@ -10,7 +10,6 @@ import pandas as pd
 import tiktoken
 from PyPDF2 import PdfReader
 from nltk.tokenize import word_tokenize, sent_tokenize
-from openai.error import RateLimitError
 from scipy import spatial
 from tenacity import (
     retry,
