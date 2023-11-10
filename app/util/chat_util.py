@@ -10,6 +10,7 @@ import pandas as pd
 import tiktoken
 from PyPDF2 import PdfReader
 from nltk.tokenize import word_tokenize, sent_tokenize
+from openai.error import RateLimitError
 from scipy import spatial
 from tenacity import (
     retry,
@@ -252,7 +253,8 @@ def query_message(
         ):
             message += doc_info
             full_message += next_article
-            docs_used.append((row["title"], row["loc"]))
+            docs_used.append(row["title"])
+            docs_used = list(set(docs_used))
     full_message += question
     return message, full_message, docs_used
 
@@ -309,5 +311,5 @@ def ask(
     except openai.error.OpenAIError as e:
         print(f"An OpenAI error occurred: {e}")
     yield "\n\nDocuments used:\n"
-    for title, loc in docs_used:
+    for title in docs_used:
         yield f"Title: {title}\n"
