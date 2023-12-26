@@ -8,7 +8,7 @@ import docx2txt
 import openai
 import pandas as pd
 import tiktoken
-from PyPDF2 import PdfReader
+from pypdf import PdfReader
 from nltk.tokenize import word_tokenize, sent_tokenize
 from openai.error import RateLimitError
 from scipy import spatial

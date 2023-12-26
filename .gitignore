@@ -5,7 +5,7 @@ __pycache__/
 
 # C extensions
 *.so
-
+include/
 # Distribution / packaging
 .Python
 build/
@@ -173,3 +173,4 @@ package-lock.json
 pyproject.toml
 stylelint.config.js
 .eslintrc.json
+/app/static/fonts/
